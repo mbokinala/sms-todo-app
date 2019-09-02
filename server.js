@@ -18,13 +18,15 @@ app.post('/sms', async (req, res) => {
   console.log(command);
   switch(command) {
     case 'CREATE':
-    var chunks = req.body.Body.toString().split(" ");  
-    chunks.shift();
+      var chunks = req.body.Body.toString().split(" ");
+      chunks.shift();
 
-    addTodo(chunks.join(' ')).then((doc) => {
-        sendMessage(doc.toString(), res);
-      })
+      addTodo(chunks.join(' ')).then((doc) => {
+        console.log(doc.toString());
+         sendMessage(doc.toString(), res);
+      });
       break;
+
     default:
       sendMessage('not a valid command', res);
   }
