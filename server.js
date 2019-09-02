@@ -11,7 +11,7 @@ const {Todo} = require('./models/todo');
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : false}));
 
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
