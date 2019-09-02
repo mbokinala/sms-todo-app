@@ -18,7 +18,10 @@ app.post('/sms', async (req, res) => {
 
   switch(command) {
     case 'CREATE':
-      addTodo(req.body.Body).then((doc) => {
+    var chunks = req.body.Body.toString.split(" ");  
+    chunks.shift();
+
+    addTodo(chunks.join(' ')).then((doc) => {
         sendMessage(doc.toString(), res);
       })
       break;
