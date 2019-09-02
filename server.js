@@ -41,7 +41,9 @@ async function addTodo(text) {
     completed: false
   });
 
-	return await todo.save();
+	await todo.save().then((doc) => {
+    return doc.toString();
+  });
 }
 
 http.createServer(app).listen(process.env.PORT || 1337, () => {
