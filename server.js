@@ -31,9 +31,11 @@ function addTodo(text) {
   });
 
 	todo.save().then((doc) => {
+    console.log('saved');
     return doc;
   }, (e) => {
-		return e;
+    console.error(e);
+    return e;
 	});
 }
 
