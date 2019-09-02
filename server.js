@@ -17,7 +17,7 @@ app.post('/sms', async (req, res) => {
   var command = req.body.Body.toString().toUpperCase().split(" ")[0];
   console.log(command);
   switch(command) {
-    case 'CREATE':
+    case 'ADD':
       var chunks = req.body.Body.toString().split(" ");
       chunks.shift();
 
@@ -38,7 +38,7 @@ app.post('/sms', async (req, res) => {
 });
 
 function formatList(list) {
-  var s = "";
+  var s = "Your list: \n";
   for(var i = 0; i < list.length; i++) {
     s = s + list[i].text + '\n';
   }
