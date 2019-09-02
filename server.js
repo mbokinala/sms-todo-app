@@ -26,7 +26,7 @@ app.post('/sms', (req, res) => {
 
 function addTodo(text) {
   var todo = new Todo({
-		text: req.body.text,
+		text,
     completed: false
   });
 
