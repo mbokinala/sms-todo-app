@@ -18,7 +18,7 @@ app.post('/sms', async (req, res) => {
 
   switch(command) {
     case 'CREATE':
-      var message = await addTodo(req.body.Body);
+      var message = await addTodo(req.body.Body).toString();
       console.log(message);
       sendMessage(message, res);
       break;
