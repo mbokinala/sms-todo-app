@@ -29,6 +29,8 @@ app.post('/sms', async (req, res) => {
     case 'LIST':
       getTodos().then((todos) => {
         sendMessage(formatList(todos));
+      }).catch((err) => {
+        sendMessage('Error: ' + err.toString());
       });
     default:
       sendMessage('not a valid command', res);
