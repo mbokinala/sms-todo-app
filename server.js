@@ -2,15 +2,15 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const express = require('express');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
+const mongoose = require(mongoose);
 
-const {mongoose} = require('./mongoose');
+mongoose.connect("mongodb://api:tw1l1o@ds245240.mlab.com:45240/text-message-to-do", {useNewUrlParser: true});
+
 const {Todo} = require('./models/todo');
 
 const app = express();
 
 app.use(bodyParser.json());
-
-mongoose.connect('mongodb://api:tw1l1o@ds245240.mlab.com:45240/text-message-to-do', {useNewUrlParser: true});
 
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
