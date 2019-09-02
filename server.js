@@ -23,7 +23,7 @@ app.post('/sms', async (req, res) => {
 
       addTodo(chunks.join(' ')).then((doc) => {
         console.log(doc.toString());
-         sendMessage(doc.toString(), res);
+        sendMessage('Created item ' + doc.text, res);
       });
       break;
 
