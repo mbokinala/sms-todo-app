@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended : false}));
 
 app.post('/sms', async (req, res) => {
   var command = req.body.Body.toString().toUpperCase().split(" ")[0];
-
+  console.log(command);
   switch(command) {
     case 'CREATE':
     var chunks = req.body.Body.toString().split(" ");  
