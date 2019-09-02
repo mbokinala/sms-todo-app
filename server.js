@@ -27,6 +27,8 @@ app.post('/sms', async (req, res) => {
       });
     case 'LIST':
       getTodos().then((todos) => {
+        console.log(todos);
+        console.log(formatList(todos));
         sendMessage(formatList(todos));
       }).catch((err) => {
         sendMessage('Error: ' + err.toString());
