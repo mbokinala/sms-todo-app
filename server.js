@@ -2,7 +2,8 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const express = require('express');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
-const mongoose = require(mongoose);
+const mongoose = require('mongoose');
+
 
 mongoose.connect("mongodb://api:tw1l1o@ds245240.mlab.com:45240/text-message-to-do", {useNewUrlParser: true});
 
