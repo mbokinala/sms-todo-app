@@ -31,9 +31,9 @@ function addTodo(text) {
   });
 
 	todo.save().then((doc) => {
-		res.status(201).send(doc);
-	}, (e) => {
-		res.status(400).send(e);
+    return doc;
+  }, (e) => {
+		return e;
 	});
 }
 
