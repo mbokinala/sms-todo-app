@@ -14,15 +14,24 @@ const app = express();
 app.use(bodyParser.urlencoded({extended : false}));
 
 app.post('/sms', (req, res) => {
+  var command = req.body.Body.split(" ").toUpperCase();
+
+  switch(command) {
+    case 'CREATE':
+      sendMessage(addTodo(req.body.Body), res);
+      break;
+    default:
+      sendMessage('not a valid command', res);
+  }
+});
+
+function sendMessage(message, res) {
   const twiml = new MessagingResponse();
-
-  addTodo(req.body.Body);
-
-  twiml.message('The Robots are coming! Head for the hills!');
+  twiml.message(message);
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
-});
+}
 
 function addTodo(text) {
   var todo = new Todo({
@@ -32,7 +41,7 @@ function addTodo(text) {
 
 	todo.save().then((doc) => {
     console.log('saved');
-    return doc;
+    return 'Created new item';
   }, (e) => {
     console.error(e);
     return e;
