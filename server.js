@@ -19,7 +19,7 @@ app.post('/sms', async (req, res) => {
   switch(command) {
     case 'CREATE':
       var message = await addTodo(req.body.Body).toString();
-      console.log(message);
+      console.log('message is populated');
       sendMessage(message, res);
       break;
     default:
@@ -42,7 +42,8 @@ async function addTodo(text) {
   });
 
 	await todo.save().then((doc) => {
-    return doc.toString();
+    console.log('doc is ready');
+    return doc;
   });
 }
 
