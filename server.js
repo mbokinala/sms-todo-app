@@ -25,13 +25,13 @@ app.post('/sms', async (req, res) => {
         console.log(doc.toString());
         sendMessage('Created item ' + doc.text, res);
       });
-      break;
     case 'LIST':
       getTodos().then((todos) => {
         sendMessage(formatList(todos));
       }).catch((err) => {
         sendMessage('Error: ' + err.toString());
       });
+      break;
     default:
       sendMessage('not a valid command', res);
   }
