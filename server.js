@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
 
-  addTodo(req.body.body);
+  addTodo(req.body.Body);
 
   twiml.message('The Robots are coming! Head for the hills!');
 
