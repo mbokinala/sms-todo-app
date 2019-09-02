@@ -18,7 +18,7 @@ app.post('/sms', (req, res) => {
 
   switch(command) {
     case 'CREATE':
-      var message = addTodo(req.body.Body);
+      var message = await addTodo(req.body.Body);
       console.log(message);
       sendMessage(message, res);
       break;
@@ -35,18 +35,13 @@ function sendMessage(message, res) {
   res.end(twiml.toString());
 }
 
-function addTodo(text) {
+async function addTodo(text) {
   var todo = new Todo({
 		text,
     completed: false
   });
 
-	todo.save().then((doc) => {
-    return 'Created new item';
-  }, (e) => {
-    console.error(e);
-    return e;
-	});
+	await todo.save();
 }
 
 http.createServer(app).listen(process.env.PORT || 1337, () => {
