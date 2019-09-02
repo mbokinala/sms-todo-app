@@ -10,6 +10,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
+ongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
+
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
 
