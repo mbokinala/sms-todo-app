@@ -10,7 +10,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-ongoose.connect('mongodb://api:tw1l1o@ds245240.mlab.com:45240/text-message-to-do', {useNewUrlParser: true});
+mongoose.connect('mongodb://api:tw1l1o@ds245240.mlab.com:45240/text-message-to-do', {useNewUrlParser: true});
 
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
