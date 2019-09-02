@@ -26,11 +26,23 @@ app.post('/sms', async (req, res) => {
         sendMessage('Created item ' + doc.text, res);
       });
       break;
-
+    case 'LIST':
+      getTodos().then((todos) => {
+        sendMessage(formatList(todos));
+      });
     default:
       sendMessage('not a valid command', res);
   }
 });
+
+function formatList(list) {
+  var s = "";
+  for(var i = 0; i < list.length; i++) {
+    s = s + list[i].text + '\n';
+  }
+
+  return s;
+}
 
 function sendMessage(message, res) {
   const twiml = new MessagingResponse();
@@ -47,6 +59,10 @@ async function addTodo(text) {
   });
 
 	return todo.save()
+}
+
+function getTodos() {
+  return Todo.find();
 }
 
 http.createServer(app).listen(process.env.PORT || 1337, () => {
