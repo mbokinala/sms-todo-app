@@ -25,16 +25,19 @@ app.post('/sms', async (req, res) => {
         console.log(doc.toString());
         sendMessage('Created item ' + doc.text, res);
       });
+      return;
     case 'LIST':
       getTodos().then((todos) => {
         sendMessage(formatList(todos), res);
       }).catch((err) => {
         sendMessage('Error: ' + err.toString());
       });
-      break;
+      return;
     default:
       sendMessage('not a valid command', res);
+      return;
   }
+  return;
 });
 
 function formatList(list) {
@@ -55,6 +58,7 @@ function sendMessage(message, res) {
   twiml.message(message);
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
+  console.log('header written');
   res.end(twiml.toString());
 }
 
