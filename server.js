@@ -13,7 +13,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended : false}));
 
-app.post('/sms', (req, res) => {
+app.post('/sms', async (req, res) => {
   var command = req.body.Body.toString().toUpperCase().split(" ")[0];
 
   switch(command) {
