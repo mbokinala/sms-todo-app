@@ -38,6 +38,10 @@ app.post('/sms', async (req, res) => {
 });
 
 function formatList(list) {
+  if(!list || list.length == 0) {
+    return 'There are no items in your list';
+  }
+
   var s = "Your list: \n";
   for(var i = 0; i < list.length; i++) {
     s = s + list[i].text + '\n';
