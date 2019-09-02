@@ -18,9 +18,9 @@ app.post('/sms', async (req, res) => {
 
   switch(command) {
     case 'CREATE':
-      var message = await addTodo(req.body.Body).toString();
-      console.log('message is populated');
-      sendMessage(message, res);
+      addTodo(req.body.Body).then((doc) => {
+        sendMessage(doc.toString(), res);
+      })
       break;
     default:
       sendMessage('not a valid command', res);
@@ -41,10 +41,7 @@ async function addTodo(text) {
     completed: false
   });
 
-	await todo.save().then((doc) => {
-    console.log('doc is ready');
-    return doc;
-  });
+	return todo.save()
 }
 
 http.createServer(app).listen(process.env.PORT || 1337, () => {
