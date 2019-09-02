@@ -18,7 +18,9 @@ app.post('/sms', (req, res) => {
 
   switch(command) {
     case 'CREATE':
-      sendMessage(addTodo(req.body.Body), res);
+      var message = addTodo(req.body.Body);
+      console.log(message);
+      sendMessage(message, res);
       break;
     default:
       sendMessage('not a valid command', res);
@@ -40,7 +42,6 @@ function addTodo(text) {
   });
 
 	todo.save().then((doc) => {
-    console.log('saved');
     return 'Created new item';
   }, (e) => {
     console.error(e);
