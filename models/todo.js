@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
-const Todo = mongoose.model('Todo', {
+const TodoSchema = mongoose.schema({
 	text: {
 		type: String,
 		required: false,
@@ -13,4 +14,7 @@ const Todo = mongoose.model('Todo', {
 	}
 });
 
-module.exports = {Todo};
+TodoSchema.plugin(AutoIncrement, {inc_field: 'id'});
+
+var TodoModel = mongoose.model('Todo', TodoSchema);
+module.exports = {TodoModel};
